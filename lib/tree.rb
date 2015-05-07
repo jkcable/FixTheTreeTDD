@@ -2,11 +2,42 @@ class NoApplesError < StandardError; end
 
 class Tree
 
-  def any_apple?
+  attr_accessor :age, :height, :apples, :alive
+
+  def initialize
+    @age = 0
+    @height = 0
+    @apples = 0
+    @alive = true
   end
 
-  # def age!
-  # end
+  def any_apple?
+    if @age >= 5 && @alive
+      true
+    else
+      false
+    end
+  end
+
+  def age!
+    @age += 1
+  end
+
+  def height
+    if @age < 30
+      @height = @age
+    else
+      @height = 30
+    end
+  end
+
+  def dead?
+    if @age > 100
+      @alive = true
+    else
+      @alive = false
+    end
+  end
 
 end
 
@@ -85,4 +116,4 @@ def tree_data
   puts "Alas, the tree, she is dead!"
 end
 
-tree_data
+#tree_data
