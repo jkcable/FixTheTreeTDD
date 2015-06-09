@@ -53,7 +53,8 @@ class AppleTree < Tree
   end
 
   def pick_an_apple!
-    raise NoApplesError, "This tree has no oranges" unless self.any_apples?
+    raise NoApplesError, "This tree has no apples" unless self.any_apples?
+    puts "I picked an apple"
   end
 
 end
@@ -61,9 +62,9 @@ end
 class Fruit
   attr_reader :color, :diameter
 
-  def initialize(color, diameter)
-    @color = color
-    @diameter = diameter
+  def initialize()
+    @color = 'orange'
+    @diameter = '3'
   end
 
   def has_seeds?
@@ -72,6 +73,14 @@ class Fruit
 end
 
 class Apple < Fruit
+  attr_reader :color, :diameter
+
+  def initialize
+    super
+    colors = ['red', 'yellow', 'green']
+    @color = colors.sample
+    @diameter = rand(2.5..3.25)
+  end
 
 end
 
@@ -104,7 +113,7 @@ def tree_data
 
     puts "Year #{tree.age} Report"
     puts "Tree height: #{tree.height} feet"
-    puts "Harvest:     #{basket.size} oranges with an average diameter of #{avg_diameter} inches"
+    puts "Harvest:     #{basket.size} apples with an average diameter of #{avg_diameter} inches"
     puts ""
 
     # Ages the tree another year
