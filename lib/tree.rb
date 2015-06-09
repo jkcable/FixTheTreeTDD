@@ -42,6 +42,7 @@ class AppleTree < Tree
   end
 
   def add_apples
+    @apples = rand(50..100)
   end
 
   def any_apples?
@@ -55,6 +56,7 @@ class AppleTree < Tree
   def pick_an_apple!
     raise NoApplesError, "This tree has no apples" unless self.any_apples?
     puts "I picked an apple"
+    Apple.new
   end
 
 end
@@ -89,11 +91,12 @@ end
 # it should calculate the diameter of the apples in the basket
 
 def tree_data
-  tree = Tree.new
+  tree = AppleTree.new
 
-  tree.age! until tree.any_apple?
+  tree.age! until tree.any_apples?
 
   puts "Tree is #{tree.age} years old and #{tree.height} feet tall"
+  puts "We have apples", tree.apples
 
   until tree.dead?
     basket = []
@@ -101,6 +104,7 @@ def tree_data
     # It places the apple in the basket
     while tree.any_apples?
       basket << tree.pick_an_apple!
+      puts "We should have apples"
     end
 
     diameter_sum = 0
@@ -123,4 +127,4 @@ def tree_data
   puts "Alas, the tree, she is dead!"
 end
 
-#tree_data
+tree_data

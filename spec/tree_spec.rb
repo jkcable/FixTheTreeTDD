@@ -97,6 +97,17 @@ describe 'Apple tree' do
     expect {apple_tree.pick_an_apple! }.to raise_error NoApplesError
   end
 
+  it 'returns an apple if we pick an apple' do
+    apple_tree.age = 5
+    expect(apple_tree.pick_an_apple!).to be_an_instance_of Apple
+  end
+
+  it 'produces apples' do
+    apple_tree.add_apples
+    expect(apple_tree.apples).to be >= 50
+    expect(apple_tree.apples).to be <= 100
+  end
+
 end
 
 describe 'Fruit' do
