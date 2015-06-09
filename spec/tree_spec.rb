@@ -78,6 +78,7 @@ describe 'Apple tree' do
 
   it 'can bear fruit starting at 5 years' do
     apple_tree.age = 5
+    apple_tree.add_apples
     expect(apple_tree.any_apples?).to eq true
   end
 
@@ -99,10 +100,12 @@ describe 'Apple tree' do
 
   it 'returns an apple if we pick an apple' do
     apple_tree.age = 5
+    apple_tree.add_apples
     expect(apple_tree.pick_an_apple!).to be_an_instance_of Apple
   end
 
   it 'produces apples' do
+    apple_tree.age = 5
     apple_tree.add_apples
     expect(apple_tree.apples).to be >= 50
     expect(apple_tree.apples).to be <= 100

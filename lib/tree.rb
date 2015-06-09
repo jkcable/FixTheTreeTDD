@@ -41,21 +41,27 @@ class AppleTree < Tree
     @apples = 0
   end
 
+  def age!
+    @age += 1
+    self.add_apples
+  end
+
   def add_apples
-    @apples = rand(50..100)
+    if @age >= 5 && @alive
+      @apples = rand(50..100)
+    else
+      @apples = 0
+    end
   end
 
   def any_apples?
-    if @age >= 5 && @alive
-      true
-    else
-      false
-    end
+      @apples > 0
   end
 
   def pick_an_apple!
     raise NoApplesError, "This tree has no apples" unless self.any_apples?
     puts "I picked an apple"
+    @apples = @apples -1
     Apple.new
   end
 
@@ -96,11 +102,12 @@ def tree_data
   tree.age! until tree.any_apples?
 
   puts "Tree is #{tree.age} years old and #{tree.height} feet tall"
-  puts "We have apples", tree.apples
+
 
   until tree.dead?
     basket = []
-
+    puts "We have apples", tree.apples
+    puts "We have any apples", tree.any_apples?
     # It places the apple in the basket
     while tree.any_apples?
       basket << tree.pick_an_apple!
